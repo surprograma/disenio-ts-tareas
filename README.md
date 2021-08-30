@@ -1,58 +1,73 @@
-# Repositorio semilla: Biblioteca TypeScript :seedling:
+# Seguimiento de tareas
 
-> Este es uno de los repositorios que utilizamos en la serie **Diseño orientado a objetos en Kotlin y TypeScript**, [disponible en YouTube](https://www.youtube.com/playlist?list=PL7q-McYJyHliqlpNGSVe-Y3EHDIma_H9U). Te recomendamos que mires la serie para entender un poco más sobre las tecnologías que elegimos. :smiley:
+![Portada](assets/portada.jpg)
 
-¡Bienvenida/o! En este repositorio encontrarás una plantilla (de las infinitas posibles) para crear una biblioteca o librería utilizando [Typescript](https://www.typescriptlang.org/). Las principales tecnologías que utilizamos son:
+## :point_up: Antes de empezar: algunos consejos
 
-- [NodeJS](https://nodejs.org/es/): entorno de ejecución para JavaScript.
-- [Ramda](http://ramdajs.com/): biblioteca para tener un manejo funcional de colecciones.
-- [Jest](https://jestjs.io/): framework para escribir tests.
+El enunciado tiene **mucha** información, van a necesitar leerlo varias veces. La sugerencia es que lo lean entero una vez (para tener una idea general) y luego vuelvan a consultarlo las veces que hagan falta.
 
-Para crear un proyecto siguiendo esta plantilla, lo único que tenés que hacer es clickear en el botón que dice `Use this template`. ¡Y no te olvides de cambiarle el nombre en el `package.json`!
+Concentrensé en los requerimientos y, excepto que se traben mucho, respeten el orden sugerido. No es necesario que hagan TDD, pero sí sería interesante que vayan creando las distintas clases y métodos a medida que resuelven cada requerimiento y no antes. 
 
-## :point_up: Prerrequisitos - para instalar antes de empezar
+En otras palabras: trabajen completando cada requerimiento antes de pasar al siguiente, con los tests que aseguran que funciona incluidos. Si al avanzar en los requerimientos les parece necesario refactorizar, adelante, van a tener los tests que garantizan que no rompieron nada. :smirk: 
 
-Vas a necesitar un IDE o al menos un editor de texto que coloree la sintaxis. Recomendamos utilizar [Visual Studio Code](https://code.visualstudio.com/) - que se lleva muy bien con proyectos JavaScript - enriquecido con los siguientes plugins:
+## :bookmark_tabs: Descripción del dominio
 
-- [ESlint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [Test Explorer UI](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-test-explorer)
-- [Jest Test Explorer](https://marketplace.visualstudio.com/items?itemName=kavod-io.vscode-jest-test-adapter)
-- [JavaScript REPL](https://marketplace.visualstudio.com/items?itemName=achil.vscode-javascript-repl)
+Una consultora de software necesita implementar un sistema para hacer el seguimiento del desarrollo de tareas. A estas tareas las clasificaremos en dos tipos distintos: **simples** y **de integración**.
 
-Para ejecutar el código es necesario tener NodeJS en su versión 14 (`lts/fermium`). Para instalarlo recomendamos utilizar el manejador de versiones [`nvm`](https://github.com/nvm-sh/nvm), aunque también podés hacerlo manualmente siguiendo las instrucciones adecuadas para tu sistema operativo.
+### Tareas simples
 
-## :ballot_box_with_check: Configuración inicial del proyecto
+Cada tarea simple tiene una cantidad de **horas estimadas** para ser terminada, algunos **empleados** asignados y un **responsable** - que no es más que un empleado que asume ese rol particular para esa tarea (podría ocurrir perfectamente que sea empleado en otra tarea). De cada empleado se conoce **cuánto cobra por hora** trabajada. Las **horas necesarias** para finalizar una tarea son las horas estimadas que requiere divido la cantidad de empleados que tiene asignados (sin contar al responsable de la misma, que no aporta nada para reducir este número).
 
-Asumiendo que ya configuraste todos los prerrequisitos, solamente hay que instalar las dependencias la primera vez que trabajes en el proyecto:
+El costo de una tarea simple es el **costo de la infraestructura** necesaria para llevarla a cabo (que se configura para cada tarea) más los salarios que les corresponden a cada uno de los empleados asignados por cada hora que tuvieron que trabajar. Al responsable se le paga la totalidad de las horas estimadas de la tarea.
 
-```shell
-npm install
+Esto mismo, en pseudocódigo, sería así:
+
+```
+Costo de Tarea Simple = 
+  Sumatoria de (Horas de trabajo de cada empleado * Sueldo por hora de cada empleado)
+  + Horas estimadas * Sueldo del responsable 
+  + Costo de infraestructura
+  
+Horas de trabajo de cada empleado = Horas estimadas / Cantidad de empleados
 ```
 
-## :file_folder: Estructura de directorios
+### Tareas de integración
 
-Todo el código fuente debe ir dentro de la carpeta `src`, pudiendo crearse otras subcarpetas adentro de ella si fuera necesario. Los archivos de código deben tener extensión `.ts` y los de tests `.test.ts`.
+Este tipo de tareas consisten en coordinar otras tareas. Las tareas de integración no tienen un costo propio por infraestructura, ni empleados directamente a cargo, aunque sí tienen un responsable.
 
-:warning: La rama principal de este repositorio es `main` y no `master`, como quizás estés acostumbrado/a. Podés leer el [comunicado oficial de la Software Freedom Conservancy](https://sfconservancy.org/news/2020/jun/23/gitbranchname/) para saber más al respecto.
+Las **horas necesarias** para realizarla se calculan como la suma de las horas necesarias para cumplir sus subtareas, más una hora para reuniones de planificación por cada 8 horas de trabajo. Se considera que su **costo** es la suma de los costos de sus subtareas más un bonus que se le paga al responsable, equivalente al 3% de esa suma. Para la **nómina de empleados**, se debe incluir a las nóminas de las subtareas más al responsable de la tarea de integración.
 
-## :woman_technologist: :man_technologist: Comandos útiles para el día a día
+El sistema debe poder soportar que una tarea de integración tenga como subtarea tanto a tareas simples como a tareas de integración.
 
-A continuación, algunos comandos necesarios para el desarrollo diario en este proyecto.
+### Proyecto
 
-### Código
+Los proyectos son, ni más ni menos, una sucesión de tareas (simples o de integración) que deben ser realizadas para cumplir un objetivo. Para cada proyecto se configuran: las **tareas**, la **fecha de inicio** y una **fecha deseada de finalización**.
 
-```shell
-# Ejecuta el linter, buscando errores en el código
-npm run lint
+Por el momento hay un solo requerimiento asociado al proyecto: saber si está atrasado. Para esto, hay que calcular los **días estimados para finalizar** y sumárselos a la fecha de inicio. Si la fecha que que resulta es, como máximo, el día siguiente a la fecha deseada, diremos que no está atrasado.
 
-# Ejecuta los tests una sola vez.
-npm test
+Los días estimados para finalizar se calculan de la siguiente forma: `sumatoria de horas de las tareas / cantidad de empleados / 8 (que es lo que dura cada jornada laboral)`. Todos los datos necesarios salen de las tareas que el proyecto tenga. :eyes: **Ojo:** una misma persona puede estar asignada a varias tareas, hay que tener esto en cuenta para que no aparezca dos veces en la cuenta.
 
-# Ejecuta los tests y se queda esperando por cambios.
-npm test:watch
-```
+## :heavy_check_mark: Requerimientos
 
-## :traffic_light: Integración continua
+Se pide resolver los siguientes requerimientos **sin** utilizar casteos ni chequeos de tipo (o sea, no vale usar `as` ni `is`). 
 
-El proyecto incluye una configuración de [GitHub Actions](https://github.com/features/actions) que ejecuta tanto el linter como los tests cada vez que detecta un push o un pull request a la rama `main`.
+1. Poder consultar la nómina de empleados de una tarea (una lista), conformada por sus empleados y su responsable. 
+1. Saber cuántas horas se necesitan para finalizar una tarea.
+1. Obtener el costo de una tarea.
+1. Incorporar al modelo las tareas de integración.
+1. Saber si un proyecto está atrasado.
+
+## :fountain_pen: Licencia
+
+Esta obra fue elaborada por [Federico Aloi](https://github.com/faloi) y publicada bajo una [Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional][cc-by-sa].
+
+[![CC BY-SA 4.0][cc-by-sa-image]][cc-by-sa]
+
+[cc-by-sa]: https://creativecommons.org/licenses/by-sa/4.0/deed.es
+[cc-by-sa-image]: https://licensebuttons.net/l/by-sa/4.0/88x31.png
+
+### Créditos
+
+:memo: [Enunciado original](https://sites.google.com/site/utndesign/material/guia-de-ejercicios/guia-objetos-patrones/tareas) creado por [Fernando Dodino](https://github.com/fdodino) y equipo de Diseño de Sistemas de Información (UTN - FRBA).
+
+:camera_flash: Imagen de portada por <a href="https://unsplash.com/@brandsandpeople?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Brands&People</a> en <a href="https://unsplash.com/s/photos/papers?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>.
