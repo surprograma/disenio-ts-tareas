@@ -2,13 +2,15 @@
 
 ![Portada](assets/portada.jpg)
 
+> Este repositorio fue generado utilizando la [semilla Biblioteca Typescript](https://github.com/surprograma/semilla-typescript-lib). Recomendamos leer su README para conocer un poco más sobre las tecnologías elegidas y los requisitos para poder utilizarlo.
+
 ## :point_up: Antes de empezar: algunos consejos
 
 El enunciado tiene **mucha** información, van a necesitar leerlo varias veces. La sugerencia es que lo lean entero una vez (para tener una idea general) y luego vuelvan a consultarlo las veces que hagan falta.
 
-Concentrensé en los requerimientos y, excepto que se traben mucho, respeten el orden sugerido. No es necesario que hagan TDD, pero sí sería interesante que vayan creando las distintas clases y métodos a medida que resuelven cada requerimiento y no antes. 
+Concentrensé en los requerimientos y, excepto que se traben mucho, respeten el orden sugerido. No es necesario que hagan TDD, pero sí sería interesante que vayan creando las distintas clases y métodos a medida que resuelven cada requerimiento y no antes.
 
-En otras palabras: trabajen completando cada requerimiento antes de pasar al siguiente, con los tests que aseguran que funciona incluidos. Si al avanzar en los requerimientos les parece necesario refactorizar, adelante, van a tener los tests que garantizan que no rompieron nada. :smirk: 
+En otras palabras: trabajen completando cada requerimiento antes de pasar al siguiente, con los tests que aseguran que funciona incluidos. Si al avanzar en los requerimientos les parece necesario refactorizar, adelante, van a tener los tests que garantizan que no rompieron nada. :smirk:
 
 ## :bookmark_tabs: Descripción del dominio
 
@@ -23,11 +25,11 @@ El costo de una tarea simple es el **costo de la infraestructura** necesaria par
 Esto mismo, en pseudocódigo, sería así:
 
 ```
-Costo de Tarea Simple = 
+Costo de Tarea Simple =
   Sumatoria de (Horas de trabajo de cada empleado * Sueldo por hora de cada empleado)
-  + Horas estimadas * Sueldo del responsable 
+  + Horas estimadas * Sueldo del responsable
   + Costo de infraestructura
-  
+
 Horas de trabajo de cada empleado = Horas estimadas / Cantidad de empleados
 ```
 
@@ -49,9 +51,9 @@ Los días estimados para finalizar se calculan de la siguiente forma: `sumatoria
 
 ## :heavy_check_mark: Requerimientos
 
-Se pide resolver los siguientes requerimientos **sin** utilizar casteos ni chequeos de tipo (o sea, no vale usar `as` ni `is`). 
+Se pide resolver los siguientes requerimientos **sin** utilizar casteos ni chequeos de tipo (o sea, no vale usar `as` ni `is`).
 
-1. Poder consultar la nómina de empleados de una tarea (una lista), conformada por sus empleados y su responsable. 
+1. Poder consultar la nómina de empleados de una tarea (una lista), conformada por sus empleados y su responsable.
 1. Saber cuántas horas se necesitan para finalizar una tarea.
 1. Obtener el costo de una tarea.
 1. Incorporar al modelo las tareas de integración.
