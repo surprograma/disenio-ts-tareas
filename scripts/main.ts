@@ -4,7 +4,7 @@ import programa from "../src/programa";
 
 try {
   (async () => {
-    await programa.ejecutar();
+    await programa.ejecutar(process.argv.slice(2));
   })();
 } catch (error) {
   console.log(Error(error));

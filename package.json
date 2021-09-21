@@ -8,7 +8,7 @@
     "lint": "eslint --cache .",
     "jest": "jest",
     "test:watch": "jest --watch",
-    "start": "ts-node scripts/estadisticas.ts"
+    "start": "ts-node scripts/main.ts"
   },
   "keywords": [],
   "dependencies": {
