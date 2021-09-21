@@ -108,6 +108,18 @@ Lo que se pide en esta etapa es:
 
 :warning: **Importante:** para no tener que lidiar con la lectura de archivos, se incluye un objeto API que realiza esta tarea.
 
+### Etapa 3 - Usando la aplicación
+
+Llegó el momento de realmente conectar a nuestro programa con el mundo real, permitiendo que "cualquier persona" (que tenga una computadora, NodeJS y los conocimientos necesarios para ejecutarlo) pueda utilizarlo.
+
+Para ello, vamos a programar una pequeña CLI, _command line interface_ o _interfaz por línea de comandos_, que nos permita visualizar los requerimientos de las dos primeras etapas, trayendo la información de los archivos JSON.
+
+El diseño de la interfaz queda librado a su creatividad, siempre y cuando cumpla con los siguientes requerimientos:
+
+1. Deben poder realizarse todas las consultas de las dos primeras etapas, interactuando con la API real.
+1. En caso de que los datos que se ingresan sean erróneos, hay que mostrar algún mensaje amigable.
+1. Incluir al menos un test por cada opción que tenga el CLI, y alguno donde se muestre un error. Simular la interacción de usuario y la interacción con la API utilizando impostores.
+
 ## :fountain_pen: Licencia
 
 Esta obra fue elaborada por [Federico Aloi](https://github.com/faloi) y publicada bajo una [Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional][cc-by-sa].
