@@ -47,11 +47,13 @@ Los proyectos son, ni más ni menos, una sucesión de tareas (simples o de integ
 
 Por el momento hay un solo requerimiento asociado al proyecto: saber si está atrasado. Para esto, hay que calcular los **días estimados para finalizar** y sumárselos a la fecha de inicio. Si la fecha que resulta es, como máximo, el día siguiente a la fecha deseada, diremos que no está atrasado.
 
-Los días estimados para finalizar se calculan de la siguiente forma: `sumatoria de horas de las tareas / cantidad de empleados / 8 (que es lo que dura cada jornada laboral)`. Todos los datos necesarios salen de las tareas que el proyecto tenga. 
+Los días estimados para finalizar se calculan de la siguiente forma: `sumatoria de horas de las tareas / cantidad de empleados / 8 (que es lo que dura cada jornada laboral)`. Todos los datos necesarios salen de las tareas que el proyecto tenga.
 
 :eyes: **Ojo:** una misma persona puede estar asignada a varias tareas, hay que tener esto en cuenta para que no aparezca dos veces en la cuenta.
 
 ## :heavy_check_mark: Requerimientos
+
+### Etapa 1 - Modelo
 
 Se pide resolver los siguientes requerimientos **sin** utilizar casteos ni chequeos de tipo (o sea, no vale usar `as` ni `is`).
 
@@ -60,6 +62,51 @@ Se pide resolver los siguientes requerimientos **sin** utilizar casteos ni chequ
 1. Obtener el costo de una tarea.
 1. Incorporar al modelo las tareas de integración.
 1. Saber si un proyecto está atrasado.
+
+### Etapa 2 - Conectando con el mundo real
+
+El objetivo de esta etapa es poder tomar la información de los proyectos de un archivo, como una primera aproximación a lo que sería un sistema "real". Estos archivos están hechos en formato [JSON](https://www.json.org/json-es.html), y cada uno corresponde a un proyecto distinto. Hemos incluido algunos proyectos de ejemplo en la carpeta `data`, aunque bien podrían crearse otros - respetando el formato establecido.
+
+Para que la información tenga sentido para un/a usuaria, agregaremos los siguientes atributos:
+
+- `titulo` del proyecto,
+- `descripcion` de las tareas simples,
+- `nombre` del empleado.
+
+A modo de referencia, incluimos un ejemplo de un proyecto:
+
+```json
+{
+  "titulo": "Batanar-Batanero-Incorrectamente",
+  "inicio": "2022-08-09T14:19:40.366Z",
+  "fin_deseado":"2022-10-02T05:51:08.801Z",
+  "tareas": [
+    {
+      "simple": true,
+      "empleados": [
+        { "nombre": "Gary Centeno", "arancel": 3771 },
+        { "nombre": "Madeline Holguín", "arancel": 2899 }
+      ],
+      "responsable": { "nombre": "Leona Gaytán", "arancel": 2054 },
+      "horas": 9,
+      "infra": 3485.81,
+      "descripcion": "Fideo Gencianáceo General."
+    },
+    {
+      "simple": false,
+      "tareas": [ ... ],
+      "responsable": { ... }
+    }
+  ]
+}
+```
+
+Lo que se pide en esta etapa es:
+
+1. Incorporar los atributos mencionados en los objetos de la etapa 1.
+1. Poder generar los objetos de la etapa 1 a partir de la representación JSON de un proyecto.
+
+:warning: **Importante:** para no tener que lidiar con la lectura de archivos, se incluye un objeto API que realiza esta tarea.
 
 ## :fountain_pen: Licencia
 
