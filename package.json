@@ -18,6 +18,7 @@
     "@types/source-map-support": "^0.5.3",
     "faker": "^5.5.3",
     "jest": "^27.0.4",
+    "luxon": "^2.0.2",
     "prompt-sync": "^4.2.0",
     "ramda": "^0.27.1",
     "source-map-support": "^0.5.19",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@types/faker": "^5.5.8",
+    "@types/luxon": "^2.0.4",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
     "eslint": "^7.28.0",
