@@ -11,8 +11,8 @@ export type TareaJson = TareaSimpleJson | TareaIntegracionJson;
 
 export type TareaSimpleJson = {
   simple: true;
-  empleados: EmpleadoJson[];
-  responsable: EmpleadoJson;
+  trabajadores: TrabajadorJson[];
+  responsable: TrabajadorJson;
   horas: number;
   infra: number;
   descripcion: string;
@@ -21,10 +21,10 @@ export type TareaSimpleJson = {
 export type TareaIntegracionJson = {
   simple: false;
   tareas: TareaJson[];
-  responsable: EmpleadoJson;
+  responsable: TrabajadorJson;
 };
 
-export type EmpleadoJson = {
+export type TrabajadorJson = {
   nombre: string;
   arancel: number;
 };

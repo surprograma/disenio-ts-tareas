@@ -55,6 +55,8 @@ Los días estimados para finalizar se calculan de la siguiente forma: `sumatoria
 
 ### Etapa 1 - Modelo
 
+Se pide resolver los siguientes requerimientos **sin** utilizar casteos ni chequeos de tipo (o sea, no vale usar `as` ni `is`).
+
 1. Poder consultar la nómina de trabajadores de una tarea (una lista), conformada por sus trabajadores y su responsable.
 1. Saber cuántas horas se necesitan para finalizar una tarea.
 1. Obtener el costo de una tarea.
@@ -69,7 +71,7 @@ Para que la información tenga sentido para un/a usuaria, agregaremos los siguie
 
 - `titulo` del proyecto,
 - `descripcion` de las tareas simples,
-- `nombre` del empleado.
+- `nombre` del trabajador.
 
 A modo de referencia, incluimos un ejemplo de un proyecto:
 
@@ -81,7 +83,7 @@ A modo de referencia, incluimos un ejemplo de un proyecto:
   "tareas": [
     {
       "simple": true,
-      "empleados": [
+      "trabajadores": [
         { "nombre": "Gary Centeno", "arancel": 3771 },
         { "nombre": "Madeline Holguín", "arancel": 2899 }
       ],
