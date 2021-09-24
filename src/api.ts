@@ -1,15 +1,15 @@
 import { promises } from "fs";
 
-type ProyectoJson = {
+export type ProyectoJson = {
   titulo: string;
   inicio: string;
   fin_deseado: string;
   tareas: TareaJson[];
 };
 
-type TareaJson = TareaSimpleJson | TareaIntegracionJson;
+export type TareaJson = TareaSimpleJson | TareaIntegracionJson;
 
-type TareaSimpleJson = {
+export type TareaSimpleJson = {
   simple: true;
   empleados: EmpleadoJson[];
   responsable: EmpleadoJson;
@@ -18,13 +18,13 @@ type TareaSimpleJson = {
   descripcion: string;
 };
 
-type TareaIntegracionJson = {
+export type TareaIntegracionJson = {
   simple: false;
   tareas: TareaJson[];
-  responsable: EmpleadoJson[];
+  responsable: EmpleadoJson;
 };
 
-type EmpleadoJson = {
+export type EmpleadoJson = {
   nombre: string;
   arancel: number;
 };
